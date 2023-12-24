@@ -1,0 +1,99 @@
+from carta import Carta
+
+class Jogador:
+    def __init__(self, id, nome):
+        self.id = id
+        self.nome = nome
+        self.mao = []
+        self.area_de_jogo = {
+            Carta.PODER_MILITAR: [], 
+            Carta.RELIGIAO: [], 
+            Carta.ECONOMIA: [], 
+            Carta.CIENCIA: [], 
+            Carta.ARTES: [], 
+            Carta.UTOPIA: []
+        }
+        self.limite_de_cartas = 3
+
+    def get_id(self):
+        return self.id
+
+    def get_nome(self):
+        return self.nome
+
+    def get_mao(self):
+        return self.mao
+
+    def get_area_de_jogo(self):
+        return self.area_de_jogo
+
+    def get_carta(self, id):
+        for carta in self.mao:
+            if carta.id == id:
+                return carta
+
+        return None
+
+    def get_id_de_cartas(self):
+        return [carta.get_id() for carta in self.mao]
+
+    def comprar_carta(self, carta):
+        self.mao.append(carta)
+
+    def baixar_carta(self, carta):
+        for carta_mao in self.mao:
+            if carta_mao.get_id() == carta.get_id():
+                self.mao.remove(carta_mao)
+        
+        self.area_de_jogo[carta.get_numero_esfera_de_poder()].append(carta)        
+
+    def pode_usar_efeitos_permanentes(self, efeitos_nivel_1):
+        for esfera_de_poder in self.area_de_jogo:
+            if len(self.area_de_jogo[esfera_de_poder]) >= efeitos_nivel_1:
+                return True
+
+        return False
+
+    def usar_efeitos_permanentes(self):
+        print('permanente')
+
+    def mostrar_opcoes(self, opcoes):
+        print(80 * '-')
+        print(f'Cartas na área de jogo de {self.get_nome()}:')
+        print(80 * '-')
+
+        for esfera_de_poder, cartas in self.area_de_jogo.items():
+            if cartas:
+                ultima_carta = cartas[-1]
+                num = ultima_carta.get_numero_esfera_de_poder()
+                opcoes.append(num)
+
+                print(
+                    f'{num} - '
+                    f'{ultima_carta.get_nome_esfera_de_poder()} '
+                    f'({len(cartas)})'
+                )
+
+    def obter_carta_sacrificada(self, opcoes):
+        while True:
+            try:
+                escolha = int(input('Qual carta deseja sacrificar? : '))
+                if escolha in opcoes:
+                    return escolha
+                else:
+                    print('Você não possui essa carta na área de jogo.')
+            except ValueError:
+                print('Por favor, insira um número válido.')
+
+    def usar_efeitos_de_sacrificio(self):
+        opcoes = []
+        self.mostrar_opcoes(opcoes)
+
+        return self.obter_carta_sacrificada(opcoes)
+
+    def is_vencedor(self, cartas_para_vencer):
+        for esfera_de_poder in self.area_de_jogo:
+            if len(self.area_de_jogo[esfera_de_poder]) >= cartas_para_vencer:
+                return True
+        
+        return False

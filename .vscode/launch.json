@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: CIV",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/civ.py",
+            "console": "integratedTerminal",
+            "args": []
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Iniciar CIV",
+            "configurations": [
+                "Python: Sala"
+            ]
+        }
+    ]
+}
