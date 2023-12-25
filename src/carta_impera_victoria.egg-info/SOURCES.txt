@@ -1,7 +1,0 @@
-LICENSE
-README.md
-setup.py
-src/carta_impera_victoria.egg-info/PKG-INFO
-src/carta_impera_victoria.egg-info/SOURCES.txt
-src/carta_impera_victoria.egg-info/dependency_links.txt
-src/carta_impera_victoria.egg-info/top_level.txt

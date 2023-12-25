@@ -1,5 +1,5 @@
 import unittest
-from baralho import Baralho, ERA_1, ERA_2, ERA_3
+from src.baralho import Baralho, ERA_1, ERA_2, ERA_3
 
 class TestBaralho(unittest.TestCase):
 
@@ -26,10 +26,20 @@ class TestBaralho(unittest.TestCase):
         self.assertIsNotNone(carta)
 
     def test_remover_3_cartas_de_cada_era(self):
+         # Cria uma cópia da lista
+        cartas_por_era_antes = {
+            ERA_1: self.baralho.cartas_por_era[ERA_1][:],
+            ERA_2: self.baralho.cartas_por_era[ERA_2][:],
+            ERA_3: self.baralho.cartas_por_era[ERA_3][:]
+        }
+
         self.baralho.remover_3_cartas_de_cada_era()
+
         for era in [ERA_1, ERA_2, ERA_3]:
-            era_inicial = len(Baralho.era_1) - 3
-            self.assertEqual(len(self.baralho.cartas_por_era[era]), era_inicial)
+            tamanho_esperado = max(0, len(cartas_por_era_antes[era]) - 3)
+            self.assertEqual(
+                len(self.baralho.cartas_por_era[era]), tamanho_esperado
+            )
 
     def test_juntar_eras_ordenadas(self):
         self.baralho.juntar_eras_ordenadas()

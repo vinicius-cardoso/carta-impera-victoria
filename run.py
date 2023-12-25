@@ -4,7 +4,7 @@ import sys
 # Importe os testes dos módulos carta e baralho
 from tests.test_carta import TestCarta
 from tests.test_baralho import TestBaralho
-from civ import main
+from src.civ import main
 
 def main():
     print("Testes passaram, executando o programa principal...")

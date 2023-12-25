@@ -5,7 +5,7 @@
             "name": "Python: CIV",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/civ.py",
+            "program": "${workspaceFolder}/run.py",
             "console": "integratedTerminal",
             "args": []
         }
@@ -14,7 +14,7 @@
         {
             "name": "Iniciar CIV",
             "configurations": [
-                "Python: Sala"
+                "Python: CIV"
             ]
         }
     ]

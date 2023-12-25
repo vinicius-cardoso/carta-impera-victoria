@@ -1,6 +1,6 @@
-from baralho import Baralho
-from jogador import Jogador
-from input_valido import input_valido, converter_opcoes_em_str
+from src.baralho import Baralho
+from src.jogador import Jogador
+from src.input_valido import input_valido, converter_opcoes_em_str
 
 ERA_1 = 1
 ERA_2 = 2
