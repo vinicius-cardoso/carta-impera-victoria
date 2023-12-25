@@ -1,4 +1,5 @@
 from carta import Carta
+from input_valido import input_valido
 
 class Jogador:
     def __init__(self, id, nome):
@@ -74,22 +75,13 @@ class Jogador:
                     f'({len(cartas)})'
                 )
 
-    def obter_carta_sacrificada(self, opcoes):
-        while True:
-            try:
-                escolha = int(input('Qual carta deseja sacrificar? : '))
-                if escolha in opcoes:
-                    return escolha
-                else:
-                    print('Você não possui essa carta na área de jogo.')
-            except ValueError:
-                print('Por favor, insira um número válido.')
-
     def usar_efeitos_de_sacrificio(self):
+        mensagem = 'Qual carta deseja sacrificar? : '
         opcoes = []
+
         self.mostrar_opcoes(opcoes)
 
-        return self.obter_carta_sacrificada(opcoes)
+        return input_valido(mensagem, opcoes)
 
     def is_vencedor(self, cartas_para_vencer):
         for esfera_de_poder in self.area_de_jogo:
