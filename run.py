@@ -4,10 +4,11 @@ import sys
 # Importe os testes dos módulos carta e baralho
 from tests.test_carta import TestCarta
 from tests.test_baralho import TestBaralho
-from src.civ import main
+import src.civ as civ
 
 def main():
-    print("Testes passaram, executando o programa principal...")
+    print(civ.SEPARADOR)
+    civ.main()
 
 if __name__ == '__main__':
     # Carrega os testes dos módulos

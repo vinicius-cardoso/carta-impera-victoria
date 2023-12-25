@@ -13,4 +13,4 @@ def input_valido(mensagem, opcoes):
             print(MSG_VALOR_VALIDO)
 
 def converter_opcoes_em_str(opcoes):
-    return ', '.join(f"'{opcao}'" for opcao in opcoes)
+    return [str(numero) for numero in opcoes]
