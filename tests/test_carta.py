@@ -1,6 +1,6 @@
 import unittest
 
-from carta import Carta
+from src.carta import Carta
 
 class TestCarta(unittest.TestCase):
 

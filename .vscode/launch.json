@@ -5,7 +5,7 @@
             "name": "Python: CIV",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/civ.py",
+            "program": "${workspaceFolder}/run.py",
             "console": "integratedTerminal",
             "args": []
         }

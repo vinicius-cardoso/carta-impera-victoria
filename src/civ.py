@@ -1,6 +1,6 @@
-from baralho import Baralho
-from jogador import Jogador
-from input_valido import input_valido, converter_opcoes_em_str
+from src.baralho import Baralho
+from src.jogador import Jogador
+from src.input_valido import input_valido, converter_opcoes_em_str
 
 ERA_1 = 1
 ERA_2 = 2
@@ -46,7 +46,7 @@ class CIV:
         mensagem = 'Deseja usar efeitos de cartas? (s/n): '
         opcoes = ['s', 'n']
 
-        if input_valido(self, mensagem, opcoes) == 's':
+        if input_valido(mensagem, opcoes) == 's':
             if jogador.pode_usar_efeitos_permanentes(EFEITOS_NIVEL_1):
                 mensagem = 'Efeitos permanentes ou de sacrifício? (p/s): '
                 opcoes = ['p', 's']
@@ -88,7 +88,7 @@ def main():
     mensagem = 'Número de jogadores (2-4): '
     opcoes = converter_opcoes_em_str(range(MIN_JOGADORES, MAX_JOGADORES + 1))
 
-    numero_de_jogadores = input_valido(mensagem, opcoes)
+    numero_de_jogadores = int(input_valido(mensagem, opcoes))
 
     print(SEPARADOR)
 
