@@ -35,33 +35,12 @@ class Baralho:
         ((Carta.UTOPIA, 'Utopia', 'U'), 16),
     )
 
-    cartas_era_1 = []
-    cartas_era_2 = []
-    cartas_era_3 = []
-
     def __init__(self):
-        id = 1
+        self.cartas_era_1 = []
+        self.cartas_era_2 = []
+        self.cartas_era_3 = []
 
-        for esfera_de_poder, qtd in self.era_1:
-            for _ in range(qtd):
-                self.cartas_era_1.append(
-                    Carta(id, esfera_de_poder, ERA_1)
-                )
-                id += 1
-
-        for esfera_de_poder, qtd in self.era_2:
-            for _ in range(qtd):
-                self.cartas_era_2.append(
-                    Carta(id, esfera_de_poder, ERA_2)
-                )
-                id += 1
-
-        for esfera_de_poder, qtd in self.era_3:
-            for _ in range(qtd):
-                self.cartas_era_3.append(
-                    Carta(id, esfera_de_poder, ERA_3)
-                )
-                id += 1
+        self.inicializar_cartas()
 
         self.cartas_por_era = {
             ERA_1: self.cartas_era_1, 
@@ -70,6 +49,24 @@ class Baralho:
         }
 
         self.cartas = []
+
+    def inicializar_cartas(self):
+        id = 1
+
+        for esfera_de_poder, qtd in self.era_1:
+            for _ in range(qtd):
+                self.cartas_era_1.append(Carta(id, esfera_de_poder, ERA_1))
+                id += 1
+
+        for esfera_de_poder, qtd in self.era_2:
+            for _ in range(qtd):
+                self.cartas_era_2.append(Carta(id, esfera_de_poder, ERA_2))
+                id += 1
+
+        for esfera_de_poder, qtd in self.era_3:
+            for _ in range(qtd):
+                self.cartas_era_3.append(Carta(id, esfera_de_poder, ERA_3))
+                id += 1
 
     def __len__(self):
         return sum(len(cartas) for cartas in self.cartas.values())
@@ -83,8 +80,9 @@ class Baralho:
 
     def remover_3_cartas_de_cada_era(self):
         for era in self.cartas_por_era:
-            for _ in range(3):            
-                self.cartas_por_era[era].pop()
+            for _ in range(3):
+                if self.cartas_por_era[era]:
+                    self.cartas_por_era[era].pop()
 
     def juntar_eras_ordenadas(self):
         self.cartas = self.cartas_por_era[ERA_3] + \

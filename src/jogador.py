@@ -29,11 +29,7 @@ class Jogador:
         return self.area_de_jogo
 
     def get_carta(self, id):
-        for carta in self.mao:
-            if carta.id == id:
-                return carta
-
-        return None
+        return next((carta for carta in self.mao if carta.id == id), None)
 
     def get_id_de_cartas(self):
         return [carta.get_id() for carta in self.mao]
@@ -49,11 +45,10 @@ class Jogador:
         self.area_de_jogo[carta.get_numero_esfera_de_poder()].append(carta)        
 
     def pode_usar_efeitos_permanentes(self, efeitos_nivel_1):
-        for esfera_de_poder in self.area_de_jogo:
-            if len(self.area_de_jogo[esfera_de_poder]) >= efeitos_nivel_1:
-                return True
-
-        return False
+        return any(
+            len(self.area_de_jogo[esfera_de_poder]) >= efeitos_nivel_1
+            for esfera_de_poder in self.area_de_jogo
+        )
 
     def usar_efeitos_permanentes(self):
         print('permanente')
@@ -84,8 +79,7 @@ class Jogador:
         return input_valido(mensagem, opcoes)
 
     def is_vencedor(self, cartas_para_vencer):
-        for esfera_de_poder in self.area_de_jogo:
-            if len(self.area_de_jogo[esfera_de_poder]) >= cartas_para_vencer:
-                return True
-        
-        return False
+        return any(
+            len(self.area_de_jogo[esfera_de_poder]) >= cartas_para_vencer
+            for esfera_de_poder in self.area_de_jogo
+        )

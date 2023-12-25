@@ -2,9 +2,7 @@ from src.baralho import Baralho
 from src.jogador import Jogador
 from src.input_valido import input_valido, converter_opcoes_em_str
 
-ERA_1 = 1
-ERA_2 = 2
-ERA_3 = 3
+
 EFEITOS_NIVEL_1 = 3
 EFEITOS_NIVEL_2 = 5
 SEPARADOR = 80 * '-'
@@ -101,7 +99,7 @@ def main():
     baralho = Baralho()
     baralho.embaralhar()
 
-    if numero_de_jogadores in [2, 3]:
+    if numero_de_jogadores in {2, 3}:
         baralho.remover_3_cartas_de_cada_era()
 
     baralho.juntar_eras_ordenadas()

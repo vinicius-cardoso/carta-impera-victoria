@@ -7,12 +7,16 @@ class TestBaralho(unittest.TestCase):
         self.baralho = Baralho()
 
     def test_inicializacao(self):
-        total_cartas = sum([qtd for _, qtd in Baralho.era_1]) + \
-                       sum([qtd for _, qtd in Baralho.era_2]) + \
-                       sum([qtd for _, qtd in Baralho.era_3])
-        total_inicializado = len(self.baralho.cartas_por_era[ERA_1]) + \
-                             len(self.baralho.cartas_por_era[ERA_2]) + \
-                             len(self.baralho.cartas_por_era[ERA_3])
+        total_cartas = (
+            sum(qtd for _, qtd in Baralho.era_1) + \
+            sum(qtd for _, qtd in Baralho.era_2) + \
+            sum(qtd for _, qtd in Baralho.era_3)
+        )
+        total_inicializado = (
+            len(self.baralho.cartas_por_era[ERA_1]) + \
+            len(self.baralho.cartas_por_era[ERA_2]) + \
+            len(self.baralho.cartas_por_era[ERA_3])
+        )
         self.assertEqual(total_inicializado, total_cartas)
 
     def test_embaralhar(self):

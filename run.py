@@ -8,7 +8,6 @@ from src.civ import main
 
 def main():
     print("Testes passaram, executando o programa principal...")
-    main()
 
 if __name__ == '__main__':
     # Carrega os testes dos módulos
