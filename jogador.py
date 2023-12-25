@@ -1,5 +1,5 @@
-from src.carta import Carta
-from src.input_valido import input_valido
+from carta import Carta
+from input_valido import input_valido
 
 class Jogador:
     def __init__(self, id, nome):

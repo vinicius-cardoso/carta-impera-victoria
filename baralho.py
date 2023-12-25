@@ -1,6 +1,6 @@
 import random
 
-from src.carta import Carta
+from carta import Carta
 
 
 ERA_1 = 1
