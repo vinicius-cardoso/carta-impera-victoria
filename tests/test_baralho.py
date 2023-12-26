@@ -2,7 +2,6 @@ import unittest
 from src.baralho import Baralho, ERA_1, ERA_2, ERA_3
 
 class TestBaralho(unittest.TestCase):
-
     def setUp(self):
         self.baralho = Baralho()
 

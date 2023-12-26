@@ -6,12 +6,12 @@ from src.input_valido import input_valido, converter_opcoes_em_str
 EFEITOS_NIVEL_1 = 3
 EFEITOS_NIVEL_2 = 5
 SEPARADOR = 80 * '-'
+CARTAS_MAO_INICIAL = 3
 MIN_JOGADORES = 2
 MAX_JOGADORES = 4
 
 class CIV:
-    def __init__(self, numero_de_jogadores):
-        self.numero_de_jogadores = numero_de_jogadores
+    def __init__(self):
         self.jogadores = []
         self.baralho = []
         self.pilha_de_descarte = []
@@ -26,9 +26,29 @@ class CIV:
     def set_baralho(self, baralho):
         self.baralho = baralho
 
+    def configurar_jogo(self, numero_de_jogadores):
+        self.numero_de_jogadores = numero_de_jogadores
+        self.set_jogadores()
+        self.ajustar_condicao_vitoria()
+        self.preparar_baralho()
+
+    def ajustar_condicao_vitoria(self):
+        if self.numero_de_jogadores == 2:
+            self.cartas_para_vencer = 8
+
+    def preparar_baralho(self):
+        baralho = Baralho()
+        baralho.embaralhar()
+
+        if self.numero_de_jogadores in {2, 3}:
+            baralho.remover_3_cartas_de_cada_era()
+
+        baralho.juntar_eras_ordenadas()
+        self.set_baralho(baralho)
+
     def distribuir_mao_inicial(self):
         for jogador in self.jogadores:
-            for _ in range(3):
+            for _ in range(CARTAS_MAO_INICIAL):
                 jogador.comprar_carta(self.baralho.distribuir_carta())
 
     def fase_1(self, jogador):
@@ -82,31 +102,21 @@ class CIV:
             # Fase 3. Comprar cartas (obrigatório)
             self.fase_3(jogador)
 
-def main():
+def obter_numero_jogadores():
     mensagem = 'Número de jogadores (2-4): '
     opcoes = converter_opcoes_em_str(range(MIN_JOGADORES, MAX_JOGADORES + 1))
 
-    numero_de_jogadores = int(input_valido(mensagem, opcoes))
+    return int(input_valido(mensagem, opcoes))
 
+def main():
+    print(SEPARADOR)
+    numero_de_jogadores = obter_numero_jogadores()
     print(SEPARADOR)
 
-    civ = CIV(numero_de_jogadores)
-    civ.set_jogadores()
-
-    if numero_de_jogadores == 2:
-        civ.cartas_para_vencer = 8
-
-    baralho = Baralho()
-    baralho.embaralhar()
-
-    if numero_de_jogadores in {2, 3}:
-        baralho.remover_3_cartas_de_cada_era()
-
-    baralho.juntar_eras_ordenadas()
-
-    civ.set_baralho(baralho)
-    civ.distribuir_mao_inicial()
-    civ.iniciar_jogo()
+    jogo = CIV()
+    jogo.configurar_jogo(numero_de_jogadores)
+    jogo.distribuir_mao_inicial()
+    jogo.iniciar_jogo()
 
 if __name__ == '__main__':
     main()

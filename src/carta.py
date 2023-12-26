@@ -34,15 +34,3 @@ class Carta:
     @property
     def esfera_de_poder(self):
         return self._esfera_de_poder
-
-    @property
-    def numero_esfera_de_poder(self):
-        return self._esfera_de_poder[self.NUMERO]
-
-    @property
-    def nome_esfera_de_poder(self):
-        return self._esfera_de_poder[self.NOME]
-
-    @property
-    def sigla_esfera_de_poder(self):
-        return self._esfera_de_poder[self.SIGLA]

@@ -3,7 +3,6 @@ import unittest
 from src.carta import Carta
 
 class TestCarta(unittest.TestCase):
-
     def setUp(self):
         esfera_de_poder = (1, 'Poder Militar', 'PM')
         self.carta = Carta(1, esfera_de_poder, 1)

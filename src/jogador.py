@@ -45,12 +45,14 @@ class Jogador:
     def baixar_carta(self, carta):
         if carta in self.mao:
             self.mao.remove(carta)
-            self.area_de_jogo[carta.esfera_de_poder[Carta.NUMERO]].append(carta)
+            self.area_de_jogo[
+                carta.esfera_de_poder[Carta.NUMERO]
+            ].append(carta)
 
     def pode_usar_efeitos_permanentes(self, efeitos_nivel_1):
         return any(
-            len(cartas) >= efeitos_nivel_1 
-            for cartas in self.area_de_jogo.values()
+            len(self.area_de_jogo[esfera_de_poder]) >= efeitos_nivel_1
+            for esfera_de_poder in self.area_de_jogo
         )
 
     def usar_efeitos_permanentes(self):
