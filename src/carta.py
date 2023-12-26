@@ -11,26 +11,38 @@ class Carta:
     SIGLA = 2
 
     def __init__(self, id, esfera_de_poder, era):
-        self.id = id
-        self.esfera_de_poder = esfera_de_poder
-        self.era = era
+        self._id = id
+        self._esfera_de_poder = esfera_de_poder
+        self._era = era
 
     def __repr__(self):
         return (
             f'{self.id} - '                
-            f'{self.esfera_de_poder[self.NOME]} ' 
-            f'({self.esfera_de_poder[self.SIGLA]}) - '
+            f'{self._esfera_de_poder[self.NOME]} ' 
+            f'({self._esfera_de_poder[self.SIGLA]}) - '
             f'Era {self.era}'
         )
 
-    def get_id(self):
-        return self.id
+    @property
+    def id(self):
+        return self._id
 
-    def get_numero_esfera_de_poder(self):
-        return self.esfera_de_poder[self.NUMERO]
+    @property
+    def era(self):
+        return self._era
 
-    def get_nome_esfera_de_poder(self):
-        return self.esfera_de_poder[self.NOME]
+    @property
+    def esfera_de_poder(self):
+        return self._esfera_de_poder
 
-    def get_sigla_esfera_de_poder(self):
-        return self.esfera_de_poder[self.SIGLA]
+    @property
+    def numero_esfera_de_poder(self):
+        return self._esfera_de_poder[self.NUMERO]
+
+    @property
+    def nome_esfera_de_poder(self):
+        return self._esfera_de_poder[self.NOME]
+
+    @property
+    def sigla_esfera_de_poder(self):
+        return self._esfera_de_poder[self.SIGLA]

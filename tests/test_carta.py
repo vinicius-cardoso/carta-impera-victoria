@@ -17,16 +17,18 @@ class TestCarta(unittest.TestCase):
         self.assertEqual(repr(self.carta), '1 - Poder Militar (PM) - Era 1')
 
     def test_get_id(self):
-        self.assertEqual(self.carta.get_id(), 1)
+        self.assertEqual(self.carta.id, 1)
 
     def test_get_numero_esfera_de_poder(self):
-        self.assertEqual(self.carta.get_numero_esfera_de_poder(), 1)
+        self.assertEqual(self.carta.esfera_de_poder[Carta.NUMERO], 1)
 
     def test_get_nome_esfera_de_poder(self):
-        self.assertEqual(self.carta.get_nome_esfera_de_poder(), 'Poder Militar')
+        self.assertEqual(
+            self.carta.esfera_de_poder[Carta.NOME], 'Poder Militar'
+        )
 
     def test_get_sigla_esfera_de_poder(self):
-        self.assertEqual(self.carta.get_sigla_esfera_de_poder(), 'PM')
+        self.assertEqual(self.carta.esfera_de_poder[Carta.SIGLA], 'PM')
 
 if __name__ == '__main__':
     unittest.main()

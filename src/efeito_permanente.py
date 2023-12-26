@@ -56,15 +56,18 @@ efeito_artes = (
 
 class EfeitoPermanente:
     def __init__(self, nome, descricao, nivel):
-        self.nome = nome
-        self.descricao = descricao
-        self.nivel = nivel
+        self._nome = nome
+        self._descricao = descricao
+        self._nivel = nivel
 
-    def get_nome(self):
-        return self.nome
+    @property
+    def nome(self):
+        return self._nome
 
-    def get_descricao(self):
-        return self.descricao
+    @property
+    def descricao(self):
+        return self._descricao
 
-    def get_nivel(self):
-        return self.nivel
+    @property
+    def nivel(self):
+        return self._nivel

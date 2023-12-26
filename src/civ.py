@@ -59,16 +59,16 @@ class CIV:
                 jogador.usar_efeitos_de_sacrificio()
 
     def fase_3(self, jogador):
-        while len(jogador.get_mao()) < jogador.limite_de_cartas:
+        while len(jogador.mao) < jogador.limite_de_cartas:
             jogador.comprar_carta(self.baralho.distribuir_carta())
 
     def iniciar_jogo(self):
         for jogador in self.jogadores:
             print(SEPARADOR)
-            print(f'Cartas na mão de {jogador.get_nome()}:')
+            print(f'Cartas na mão de {jogador.nome}:')
             print(SEPARADOR)
 
-            for carta in jogador.get_mao():
+            for carta in jogador.mao:
                 print(carta)
             
             print(SEPARADOR)

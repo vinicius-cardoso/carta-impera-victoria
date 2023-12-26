@@ -43,11 +43,13 @@ efeitos_de_sacrificio = (
 
 class EfeitoDeSacrifico:
     def __init__(self, nome, descricao):
-        self.nome = nome
-        self.descricao = descricao
+        self._nome = nome
+        self._descricao = descricao
 
-    def get_nome(self):
-        return self.nome
+    @property
+    def nome(self):
+        return self._nome
 
-    def get_descricao(self):
-        return self.descricao
+    @property
+    def descricao(self):
+        return self._descricao

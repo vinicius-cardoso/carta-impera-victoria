@@ -50,6 +50,9 @@ class Baralho:
 
         self.cartas = []
 
+    def __len__(self):
+        return len(self.cartas)
+
     def inicializar_cartas(self):
         id = 1
 
@@ -68,9 +71,6 @@ class Baralho:
                 self.cartas_era_3.append(Carta(id, esfera_de_poder, ERA_3))
                 id += 1
 
-    def __len__(self):
-        return sum(len(cartas) for cartas in self.cartas.values())
-
     def embaralhar(self):
         for era in self.cartas_por_era:
             random.shuffle(self.cartas_por_era[era])
@@ -88,4 +88,3 @@ class Baralho:
         self.cartas = self.cartas_por_era[ERA_3] + \
                       self.cartas_por_era[ERA_2] + \
                       self.cartas_por_era[ERA_1]
-

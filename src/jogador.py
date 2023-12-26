@@ -3,10 +3,10 @@ from src.input_valido import input_valido
 
 class Jogador:
     def __init__(self, id, nome):
-        self.id = id
-        self.nome = nome
-        self.mao = []
-        self.area_de_jogo = {
+        self._id = id
+        self._nome = nome
+        self._mao = []
+        self._area_de_jogo = {
             Carta.PODER_MILITAR: [], 
             Carta.RELIGIAO: [], 
             Carta.ECONOMIA: [], 
@@ -16,38 +16,41 @@ class Jogador:
         }
         self.limite_de_cartas = 3
 
-    def get_id(self):
-        return self.id
+    @property
+    def id(self):
+        return self._id
 
-    def get_nome(self):
-        return self.nome
+    @property
+    def nome(self):
+        return self._nome
 
-    def get_mao(self):
-        return self.mao
+    @property
+    def mao(self):
+        return self._mao
 
-    def get_area_de_jogo(self):
-        return self.area_de_jogo
+    @property
+    def area_de_jogo(self):
+        return self._area_de_jogo
 
     def get_carta(self, id):
         return next((carta for carta in self.mao if carta.id == id), None)
 
     def get_id_de_cartas(self):
-        return [carta.get_id() for carta in self.mao]
+        return [carta.id for carta in self.mao]
 
     def comprar_carta(self, carta):
-        self.mao.append(carta)
+        if len(self.mao) < self.limite_de_cartas:
+            self.mao.append(carta)
 
     def baixar_carta(self, carta):
-        for carta_mao in self.mao:
-            if carta_mao.get_id() == carta.get_id():
-                self.mao.remove(carta_mao)
-        
-        self.area_de_jogo[carta.get_numero_esfera_de_poder()].append(carta)        
+        if carta in self.mao:
+            self.mao.remove(carta)
+            self.area_de_jogo[carta.esfera_de_poder[Carta.NUMERO]].append(carta)
 
     def pode_usar_efeitos_permanentes(self, efeitos_nivel_1):
         return any(
-            len(self.area_de_jogo[esfera_de_poder]) >= efeitos_nivel_1
-            for esfera_de_poder in self.area_de_jogo
+            len(cartas) >= efeitos_nivel_1 
+            for cartas in self.area_de_jogo.values()
         )
 
     def usar_efeitos_permanentes(self):
@@ -55,19 +58,18 @@ class Jogador:
 
     def mostrar_opcoes(self, opcoes):
         print(80 * '-')
-        print(f'Cartas na área de jogo de {self.get_nome()}:')
+        print(f'Cartas na área de jogo de {self.nome}:')
         print(80 * '-')
 
         for esfera_de_poder, cartas in self.area_de_jogo.items():
             if cartas:
                 ultima_carta = cartas[-1]
-                num = ultima_carta.get_numero_esfera_de_poder()
+                num = ultima_carta.esfera_de_poder[Carta.NUMERO]
+
                 opcoes.append(num)
 
-                print(
-                    f'{num} - '
-                    f'{ultima_carta.get_nome_esfera_de_poder()} '
-                    f'({len(cartas)})'
+                print(f'{num} - {ultima_carta.esfera_de_poder[Carta.NOME]} '
+                      f'({len(cartas)})'
                 )
 
     def usar_efeitos_de_sacrificio(self):
@@ -80,6 +82,6 @@ class Jogador:
 
     def is_vencedor(self, cartas_para_vencer):
         return any(
-            len(self.area_de_jogo[esfera_de_poder]) >= cartas_para_vencer
-            for esfera_de_poder in self.area_de_jogo
+            len(cartas) >= cartas_para_vencer 
+            for cartas in self.area_de_jogo.values()
         )
